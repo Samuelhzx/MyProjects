@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 from math import *
 from sympy import Ei
 import numpy as np
 import matplotlib.pyplot as plt
 print('程序预备中……')
-=======
-print('程序预备中……')
-import matplotlib.pyplot as plt
-import numpy as np
-from sympy import Ei
-from math import *
->>>>>>> origin/main
 
 '''
 如果没有sympy的话这几个也能用，不过慢
@@ -58,7 +50,6 @@ def zero_points(up):
     return zero
 
 '''
-<<<<<<< HEAD
 
 
 def O(x):
@@ -89,44 +80,12 @@ def f(b):  # 计算素数，由于计算量不大，就不用米勒拉宾算法�
 
 
 def zeta(s):                  # zeta_function_from_Havil_2003
-=======
-def O(x):
-    num=np.linspace(x,x+10,1000)
-    summ=0
-    for i in num:
-        summ+=1/i/(i*i-1)/log(i)
-    return summ/100
-
-def f(b):#计算素数，由于计算量不大，就不用米勒拉宾算法了
-    a=2
-    i=23
-    primes=[2,3,5,7,11,13,17,19]
-    while len(primes)<b:
-        n=1
-        pn=0
-        while pn**2<i:
-            pn=primes[n]
-            if i%pn == 0:
-                break
-            n+=1
-        if pn**2>i:
-            primes.append(i)
-        i+=a
-        a=6-a
-    return primes
-
-def zeta( s ):                  # zeta_function_from_Havil_2003
->>>>>>> origin/main
     '''
     |             1        ∞      1       n              n
     |  ζ(s) = --------- *  Σ   ------- *  Σ   (-1)^k * (   ) * (k+1)^(-s)
     |         1-2^(1-s)   n=0  2^(n+1)   k=0             k
     '''
-<<<<<<< HEAD
     E = 1e-10
-=======
-    E=1e-10
->>>>>>> origin/main
     res = 0+0j
     n = -1
     while True:
@@ -139,7 +98,6 @@ def zeta( s ):                  # zeta_function_from_Havil_2003
             kk += comb * (k+1) ** -s
             comb *= (k-n) / (k+1)
 
-<<<<<<< HEAD
         kk *= 2 ** - (n+1)
         res += kk
 
@@ -155,37 +113,17 @@ def zeros():
     for i in x:
         if abs(zeta(0.5+1j*i)) < 0.001:
             if i-zero[-1] > 0.01:
-=======
-        kk *= 2 **- (n+1)
-        res += kk
-
-        if abs(kk) < E: 
-            #print(n)
-            break
-    return res / ( 1 - 2 ** (1-s) )
-def zeros():
-    x=np.linspace(14,50,100000)
-    zero=[0]
-    for i in x:
-        if abs(zeta(0.5+1j*i))<0.001:
-            if i-zero[-1]>0.01:
->>>>>>> origin/main
                 zero.append(i)
                 print(i)
     del zero[0]
     return zero
 
-<<<<<<< HEAD
 
 def fenjie(a):  # 分解质因数
-=======
-def fenjie(a):#分解质因数
->>>>>>> origin/main
     zhi = []
     while a != 1:
         for i in primes:
             if a % i == 0:
-<<<<<<< HEAD
                 a = a/i
                 zhi.append(i)
             if i > a:
@@ -225,43 +163,6 @@ print('程序准备就绪')
 primes = f(10000)
 
 zero = zeros()
-=======
-                a=a/i
-                zhi.append(i)
-            if i>a:
-                break
-    return zhi
-
-def u(n):
-    if n==1:
-        return 1
-    for i in primes:
-        if i*i>n:
-            break
-        elif n%(i*i)==0:
-            return 0
-    zhi=fenjie(n)
-    return (-1)**len(zhi)
-
-def PI(x):
-    result=Ei(np.log(x))-log(2)+O(x)
-    
-    for i in zero:
-        k=float(i)
-        result-=Ei(log(x)*(0.5+k*1j))+Ei(log(x)*(0.5-k*1j))
-    return result+O(x)
-
-def pi(x):
-    prim=0
-    for n in range(1,floor(10)):
-        prim+=u(n)/n*PI(x**(1/n))
-    return prim
-
-print('程序准备就绪')
-primes=f(10000)
-
-zero=zeros()
->>>>>>> origin/main
 '''[14.1,21,25,30.4,32.94,37.57,40.91,48.01,49.78,52.98,56.44,59.35,
 60.81,65.11,67.08,69.55,75.69,77.15,84.72,87.42,92.49,94.63,95.86,98.83]
 #zero_points(1000)'''
@@ -270,7 +171,6 @@ zeros= open("zerosb.txt","r")
 zero = zeros.readlines()
 zeros.close()
 '''
-<<<<<<< HEAD
 x = np.linspace(2, 15, 29)
 y = []
 z = []
@@ -283,17 +183,3 @@ for i in x:
 plt.plot(x, y)
 plt.plot(x, z)
 plt.show()
-=======
-x=np.linspace(2,15,29)
-y=[]
-z=[]
-lin=0
-for i in x:
-    while primes[lin]<i:
-        lin+=1
-    y.append(lin)
-    z.append(pi(i))
-plt.plot(x,y)
-plt.plot(x,z)
-plt.show()
->>>>>>> origin/main
