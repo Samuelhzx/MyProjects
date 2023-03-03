@@ -13,17 +13,17 @@ def write(a):
 
 
 def f(a, b, m):
-    return g*m/abs(b-a)**3*(b-a)*t
+    return g * m / abs(b - a) ** 3 * (b - a) * t
 
 
 pg.init()
 window = pg.display.set_mode((1200, 800))  # ,pg.RESIZABLE)
 pg.display.set_caption("ThreeBody")
-logo = pg.image.load('logo.bmp')
+logo = pg.image.load("logo.bmp")
 pg.display.set_icon(logo)
-star1 = pg.image.load('blue.png')
-star2 = pg.image.load('green.png')
-star3 = pg.image.load('red.png')
+star1 = pg.image.load("blue.png")
+star2 = pg.image.load("green.png")
+star3 = pg.image.load("red.png")
 
 r1 = star1.get_rect()
 r2 = star2.get_rect()
@@ -42,27 +42,27 @@ v2 = 0.05
 v3 = -0.05
 
 timee = 0
-p1 = r1.centerx+r1.centery*1j
-p2 = r2.centerx+r2.centery*1j
-p3 = r3.centerx+r3.centery*1j
+p1 = r1.centerx + r1.centery * 1j
+p2 = r2.centerx + r2.centery * 1j
+p3 = r3.centerx + r3.centery * 1j
 
-font = pg.font.Font('euclid.ttf', 20)
+font = pg.font.Font("euclid.ttf", 20)
 
 while True:
     for i in range(1000):
-        v1 += f(p1, p2, m2)+f(p1, p3, m3)
-        v2 += f(p2, p1, m1)+f(p2, p3, m3)
-        v3 += f(p3, p1, m1)+f(p3, p2, m2)
-        p1 += v1*t
-        p2 += v2*t
-        p3 += v3*t
+        v1 += f(p1, p2, m2) + f(p1, p3, m3)
+        v2 += f(p2, p1, m1) + f(p2, p3, m3)
+        v3 += f(p3, p1, m1) + f(p3, p2, m2)
+        p1 += v1 * t
+        p2 += v2 * t
+        p3 += v3 * t
 
     # window.fill((0,0,0))
     yrect = 0
-    write('time:'+str(abs(timee)))
-    write('blue:'+str(abs(v1)))
-    write('green:'+str(abs(v2)))
-    write('red:'+str(abs(v3)))
+    write("time:" + str(abs(timee)))
+    write("blue:" + str(abs(v1)))
+    write("green:" + str(abs(v2)))
+    write("red:" + str(abs(v3)))
     r1.center = p1.real, p1.imag
     r2.center = p2.real, p2.imag
     r3.center = p3.real, p3.imag

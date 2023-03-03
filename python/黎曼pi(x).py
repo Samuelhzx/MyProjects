@@ -2,9 +2,10 @@ from math import *
 from sympy import Ei
 import numpy as np
 import matplotlib.pyplot as plt
-print('程序预备中……')
 
-'''
+print("程序预备中……")
+
+"""
 如果没有sympy的话这几个也能用，不过慢
 def Ei2(x):
     num=np.linspace(0.3725,x,100*int(abs(x)))
@@ -49,15 +50,15 @@ def zero_points(up):
     del zero[0]
     return zero
 
-'''
+"""
 
 
 def O(x):
-    num = np.linspace(x, x+10, 1000)
+    num = np.linspace(x, x + 10, 1000)
     summ = 0
     for i in num:
-        summ += 1/i/(i*i-1)/log(i)
-    return summ/100
+        summ += 1 / i / (i * i - 1) / log(i)
+    return summ / 100
 
 
 def f(b):  # 计算素数，由于计算量不大，就不用米勒拉宾算法了
@@ -75,44 +76,44 @@ def f(b):  # 计算素数，由于计算量不大，就不用米勒拉宾算法�
         if pn**2 > i:
             primes.append(i)
         i += a
-        a = 6-a
+        a = 6 - a
     return primes
 
 
-def zeta(s):                  # zeta_function_from_Havil_2003
-    '''
+def zeta(s):  # zeta_function_from_Havil_2003
+    """
     |             1        ∞      1       n              n
     |  ζ(s) = --------- *  Σ   ------- *  Σ   (-1)^k * (   ) * (k+1)^(-s)
     |         1-2^(1-s)   n=0  2^(n+1)   k=0             k
-    '''
+    """
     E = 1e-10
-    res = 0+0j
+    res = 0 + 0j
     n = -1
     while True:
         n += 1
-        kk = 0+0j
+        kk = 0 + 0j
 
         comb = 1
-        for k in range(n+1):
+        for k in range(n + 1):
 
-            kk += comb * (k+1) ** -s
-            comb *= (k-n) / (k+1)
+            kk += comb * (k + 1) ** -s
+            comb *= (k - n) / (k + 1)
 
-        kk *= 2 ** - (n+1)
+        kk *= 2 ** -(n + 1)
         res += kk
 
         if abs(kk) < E:
             # print(n)
             break
-    return res / (1 - 2 ** (1-s))
+    return res / (1 - 2 ** (1 - s))
 
 
 def zeros():
     x = np.linspace(14, 50, 100000)
     zero = [0]
     for i in x:
-        if abs(zeta(0.5+1j*i)) < 0.001:
-            if i-zero[-1] > 0.01:
+        if abs(zeta(0.5 + 1j * i)) < 0.001:
+            if i - zero[-1] > 0.01:
                 zero.append(i)
                 print(i)
     del zero[0]
@@ -124,7 +125,7 @@ def fenjie(a):  # 分解质因数
     while a != 1:
         for i in primes:
             if a % i == 0:
-                a = a/i
+                a = a / i
                 zhi.append(i)
             if i > a:
                 break
@@ -135,42 +136,42 @@ def u(n):
     if n == 1:
         return 1
     for i in primes:
-        if i*i > n:
+        if i * i > n:
             break
-        elif n % (i*i) == 0:
+        elif n % (i * i) == 0:
             return 0
     zhi = fenjie(n)
-    return (-1)**len(zhi)
+    return (-1) ** len(zhi)
 
 
 def PI(x):
-    result = Ei(np.log(x))-log(2)+O(x)
+    result = Ei(np.log(x)) - log(2) + O(x)
 
     for i in zero:
         k = float(i)
-        result -= Ei(log(x)*(0.5+k*1j))+Ei(log(x)*(0.5-k*1j))
-    return result+O(x)
+        result -= Ei(log(x) * (0.5 + k * 1j)) + Ei(log(x) * (0.5 - k * 1j))
+    return result + O(x)
 
 
 def pi(x):
     prim = 0
     for n in range(1, floor(10)):
-        prim += u(n)/n*PI(x**(1/n))
+        prim += u(n) / n * PI(x ** (1 / n))
     return prim
 
 
-print('程序准备就绪')
+print("程序准备就绪")
 primes = f(10000)
 
 zero = zeros()
-'''[14.1,21,25,30.4,32.94,37.57,40.91,48.01,49.78,52.98,56.44,59.35,
+"""[14.1,21,25,30.4,32.94,37.57,40.91,48.01,49.78,52.98,56.44,59.35,
 60.81,65.11,67.08,69.55,75.69,77.15,84.72,87.42,92.49,94.63,95.86,98.83]
-#zero_points(1000)'''
-'''
+#zero_points(1000)"""
+"""
 zeros= open("zerosb.txt","r")
 zero = zeros.readlines()
 zeros.close()
-'''
+"""
 x = np.linspace(2, 15, 29)
 y = []
 z = []
